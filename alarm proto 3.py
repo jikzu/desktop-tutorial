@@ -11,18 +11,30 @@ from tkinter import messagebox
 
 
 def Alarm():
+    global x,y
     if a1.get()=="AM":
         x=int(b1.get())
         y=int(b2.get())
+        if x <= 12 and y <= 60:
+              Time()
+         else:            
+               messagebox.showerror("error","please enter time in 12-hour format only")
+                
     if a1.get()=="PM":
         x=int(b1.get())+12  #to convert 12-hour format to 24-hour for comparision with present system time(that is in 24 hour format)
         y=int(b2.get())
-    messagebox.showinfo("notification", "alarm has been set")   #pops up a notification when time is set for alarm
-    while True:
-        if x == datetime.datetime.now().hour and y == datetime.datetime.now().minute :       #compares present time with alarm time set
-            print("subh ho gyi hae abhi khud jaagg jaooo, wrna mummie aenge aur chapal maar ke jaeynege")   #prints at alarm time     
-            playsound("Creepy-background-music.mp3",winsound.SND_ASYNC)   #plays a audio at alarm time
-            break
+         if x <= 24 and y <= 60:
+              Time()
+         else:
+               messagebox.showerror("error","please enter time in 12-hour format only")
+                
+  def Time():       
+     messagebox.showinfo("notification", "alarm has been set")   #pops up a notification when time is set for alarm
+     while True:
+          if x == datetime.datetime.now().hour and  y == datetime.datetime.now().minute :   #compares present time with alarm time set
+               print("subh ho gyi hae abhi khud jaagg jaooo, wrna mummie aenge aur chapal maar ke jaeynege")   #prints at alarm time     
+               playsound("Creepy-background-music.mp3",winsound.SND_ASYNC)   #plays a audio at alarm time
+               break
             
         
     
